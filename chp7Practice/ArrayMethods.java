@@ -34,4 +34,40 @@ public class ArrayMethods
             }
         }
     }
+    
+    public void replaceWithLargerNeighbor()
+    {
+        int[] tempArray = new int[values.length];
+        for (int i = 1; i < values.length - 1; i++)
+        {
+            if (values[i-1] > values[i+1])
+            {
+                tempArray[i] = values[i-1];
+            }
+            else
+            {
+                tempArray[i] = values[i+1];
+            }
+        }
+        values = tempArray;
+    }
+    
+    public void removeMiddle()
+    {
+        if (values.length%2 != 0)
+        {
+            int[] tempArray = new int[values.length - 1];
+            int i = 0;
+            while (i != (int) ((values.length%2) + .5))
+            {
+                tempArray[i] = values[i];
+                i++;
+            }
+            i++;
+            while (i < values.length)
+            {
+                tempArray[i-1] = values[i];
+            }
+        }
+    }
 }
