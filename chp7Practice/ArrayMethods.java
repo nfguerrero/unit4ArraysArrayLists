@@ -7,6 +7,14 @@ public class ArrayMethods
         this.values = initialValues;
     }
     
+    public void printArray()
+    {
+        for(int i = 0; i < values.length; i ++)
+        {
+            System.out.print(" " + values[i]);
+        }
+    }
+    
     public void swapFirstAndLast()
     {
         int temp = values[0];
@@ -14,7 +22,7 @@ public class ArrayMethods
         values[values.length-1] = temp;
     }
     
-    public void shitRight()
+    public void shiftRight()
     {
         int temp = values[values.length-1];
         for (int i = values.length-1; i > 0; i--)
@@ -38,6 +46,8 @@ public class ArrayMethods
     public void replaceWithLargerNeighbor()
     {
         int[] tempArray = new int[values.length];
+        tempArray[0] = values[0];
+        tempArray[values.length-1] = values[values.length-1];
         for (int i = 1; i < values.length - 1; i++)
         {
             if (values[i-1] > values[i+1])
@@ -49,25 +59,43 @@ public class ArrayMethods
                 tempArray[i] = values[i+1];
             }
         }
-        values = tempArray;
+        
+        for (int i = 0; i < values.length; i++)
+        {
+            values[i] = tempArray[i];
+        }
     }
     
     public void removeMiddle()
     {
+        int type = 0;
+        double mid = 0;
         if (values.length%2 != 0)
         {
-            int[] tempArray = new int[values.length - 1];
-            int i = 0;
-            while (i != (int) ((values.length%2) + .5))
-            {
-                tempArray[i] = values[i];
-                i++;
-            }
-            i++;
-            while (i < values.length)
-            {
-                tempArray[i-1] = values[i];
-            }
+            type = 1;
+            mid = .5;
         }
+        else
+        {
+            type = 2;
+            mid = 1;
+        }
+        
+        int[] tempArray = new int[values.length - type];
+        int i = 0;
+        while (i != (int) ((values.length/2) - mid))
+        {
+            tempArray[i] = values[i];
+            i++;
+        }
+        i += type;
+        while (i < values.length)
+        {
+            tempArray[i-type] = values[i];
+            i++;
+        }
+        
+        values = tempArray;
+        
     }
 }
