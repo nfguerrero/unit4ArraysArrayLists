@@ -60,10 +60,7 @@ public class ArrayMethods
             }
         }
         
-        for (int i = 0; i < values.length; i++)
-        {
-            values[i] = tempArray[i];
-        }
+        values = tempArray;
     }
     
     public void removeMiddle()
@@ -73,7 +70,7 @@ public class ArrayMethods
         if (values.length%2 != 0)
         {
             type = 1;
-            mid = .5;
+            mid = -.5;
         }
         else
         {
@@ -96,6 +93,108 @@ public class ArrayMethods
         }
         
         values = tempArray;
+    }
+    
+    public void evensToFront()
+    {
+        int[] tempArray = new int[values.length];
+        int top = 0;
+        int bottom = values.length - 1;
         
+        for (int i = 0; i < values.length; i++)
+        {
+            if (values[i]%2 == 0)
+            {
+                tempArray[top] = values[i];
+                top++;
+            }
+            else
+            {
+                tempArray[bottom] = values[i];
+                bottom--;
+            }
+        }
+        
+        values = tempArray;
+    }
+    
+    public int secondLargest()
+    {
+        int large = 0;
+        int second = 0;
+        
+        for (int i = 0; i < values.length; i++)
+        {
+            if (values[i] >= large)
+            {
+                second = large;
+                large = values[i];
+            }
+        }
+        
+        return second;
+    }
+    
+    public boolean increasingOrder()
+    {
+        int previous = values[0];
+        int i = 1;
+        boolean increasing = true;
+        boolean inc = true;
+        
+        while ((i < values.length) && (inc))
+        {
+            if (values[i] >= previous)
+            {
+                previous = values[i];
+                if (i == values.length - 1)
+                {
+                    inc = false;
+                }
+            }
+            else
+            {
+                increasing = false;
+                inc = false;
+            }
+            i++;
+        }
+        
+        return increasing;
+    }
+    
+    public boolean adjacentDuplicates()
+    {
+        int previous = values[0];
+        boolean adjacent = false;
+        
+        for (int i = 1; i < values.length; i++)
+        {
+            if (values[i] == previous)
+            {
+                adjacent = true;
+            }
+        }
+        
+        return adjacent;
+    }
+    
+    public boolean duplicates()
+    {
+        int[] tempArray = values;
+        boolean duplicate = false;
+        
+        for (int i = 0; i < values.length; i++)
+        {
+            for (int j = 0; j < tempArray.length; j++)
+            {
+                if ((values[i] == tempArray[j]) && (i != j))
+                {
+                    duplicate = true;
+                }
+            }
+        }
+        
+        return duplicate;
     }
 }
