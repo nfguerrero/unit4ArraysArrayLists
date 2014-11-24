@@ -20,7 +20,7 @@ public class CharMatrix
     {
         for (int col = 0; col < cols; col++)
         {
-            field[row][col] = " ";
+            field[row][col] = ' ';
         }
     }
   }
@@ -70,7 +70,7 @@ public class CharMatrix
   // false otherwise
   public boolean isEmpty(int row, int col)
   {
-    if (field[row][col].equals(" "))
+    if (field[row][col] == ' ')
     {
         return true;
     }
@@ -85,7 +85,13 @@ public class CharMatrix
   // lower right corner of the rectangle.
   public void fillRect(int row0, int col0, int row1, int col1, char fill)
   {
-    ...
+    for (int row = row0; row <= row1; row++)
+    {
+        for (int col = col0; col <= col1; col++)
+        {
+            field[row][col] = fill;
+        }
+    }
   }
 
   // Fills the given rectangle with SPACE characters.
@@ -93,18 +99,40 @@ public class CharMatrix
   // lower right corner of the rectangle.
   public void clearRect(int row0, int col0, int row1, int col1)
   {
-    ...
+    for (int row = row0; row <= row1; row++)
+    {
+        for (int col = col0; col <= col1; col++)
+        {
+            field[row][col] = ' ';
+        }
+    }
   }
 
   // Returns the count of all non-space characters in row 
   public int countInRow(int row)
   {
-    ...
+    int count = 0;
+    for (char i : field[row])
+    {
+        if (i != ' ')
+        {
+            count++;
+        }
+    }
+    return count;
   }
 
   // Returns the count of all non-space characters in col 
   public int countInCol(int col)
   {
-    ...
+    int count = 0;
+    for (char[] row : field)
+    {
+        if (row[col] != ' ')
+        {
+            count++;
+        }
+    }
+    return count;
   }
 }
