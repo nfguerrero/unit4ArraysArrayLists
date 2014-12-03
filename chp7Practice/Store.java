@@ -29,4 +29,17 @@ public class Store
         
         return best.getName();
     }
+    
+    public ArrayList<String> nameOfBestCustomers(int topN)
+    {
+        ArrayList<String> best = new ArrayList<String>();
+        ArrayList.set(0, customers.get(0))
+        ArrayList.set(1, customers.get(1))
+        ArrayList.set(2, customers.get(2))
+        
+        for (int i = 0; i < customers.size()-1; i++)
+        {
+            if (customer.getAmount() >
+        }
+    }
 }
