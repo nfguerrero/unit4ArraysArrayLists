@@ -9,6 +9,7 @@ public class Cashier
         
         System.out.print("Amount of customers: ");
         int customers = scan.nextInt();
+
         System.out.println("");
         for (int i = 0; i < customers; i++)
         {
@@ -20,6 +21,12 @@ public class Cashier
             store.addSale(name, amount);
         }
         
-        System.out.print("\nName of best Customer: " + store.nameOfBestCustomer());
+        System.out.println("\nName of best Customer: " + store.nameOfBestCustomer());
+        
+        System.out.print("\nName of best Customers: ");
+        for (int i = 0; i < 3; i++)
+        {
+            System.out.print(store.nameOfBestCustomers(3).get(i) + " ");
+        }
     }
 }

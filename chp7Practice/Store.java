@@ -32,14 +32,28 @@ public class Store
     
     public ArrayList<String> nameOfBestCustomers(int topN)
     {
-        ArrayList<String> best = new ArrayList<String>();
-        ArrayList.set(0, customers.get(0))
-        ArrayList.set(1, customers.get(1))
-        ArrayList.set(2, customers.get(2))
+        ArrayList<Customer> best = new ArrayList<Customer>(topN);
+        best.add(customers.get(0));
+        best.add(customers.get(1));
+        best.add(customers.get(2));
         
-        for (int i = 0; i < customers.size()-1; i++)
+        for (int i = 4; i < customers.size(); i++)
         {
-            if (customer.getAmount() >
+            for (int j = 0; j < best.size(); j++)
+            {
+                if (customers.get(i).getAmount() > best.get(j).getAmount())
+                {
+                    best.set(j, customers.get(i));
+                }
+            }
         }
+        
+        ArrayList<String> names = new ArrayList<String>(topN);
+        for (int i = 0; i < best.size(); i++)
+        {
+            names.add(best.get(i).getName());
+        }
+        
+        return names;
     }
 }
