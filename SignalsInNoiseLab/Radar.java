@@ -14,6 +14,12 @@ public class Radar
     // value of each cell is incremented for each scan in which that cell triggers detection 
     private int[][] accumulator;
     
+    //all possible vector changes
+    private int[][] vectors;
+    
+    //accumulator of all possible vectors;
+    private int[][] vectorAccumulator;
+    
     // location of the monster
     private int monsterLocationRow;
     private int monsterLocationCol;

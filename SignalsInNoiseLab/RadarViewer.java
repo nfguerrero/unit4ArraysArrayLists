@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import java.util.Scanner;
 
 /**
  * Class that contains the main method for the program and creates the frame containing the component.
@@ -29,6 +30,15 @@ public class RadarViewer
         // a frame contains a single component; create the radar component and add it to the frame
         RadarComponent component = new RadarComponent(radar);
         frame.add(component);
+        
+        //asks user for information
+        Scanner scan =  new Scanner(System.in);
+        System.out.print("Row: ");
+        int row = scan.nextInt();
+        System.out.print("Col: ");
+        int col = scan.nextInt();
+        
+        radar.setMonsterLocation(row, col);
         
         // set the size of the frame to encompass the contained component
         frame.pack();
