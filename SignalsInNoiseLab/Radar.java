@@ -46,7 +46,7 @@ public class Radar
         //  setMonsterLocation method
         monsterLocationRow = (int)(Math.random() * rows);
         monsterLocationCol = (int)(Math.random() * cols);
-        
+         
         noiseFraction = 0.05;
         numScans= 0;
     }
