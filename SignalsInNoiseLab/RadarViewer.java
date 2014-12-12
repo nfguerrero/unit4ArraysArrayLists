@@ -37,6 +37,10 @@ public class RadarViewer
         int row = scan.nextInt();
         System.out.print("Col: ");
         int col = scan.nextInt();
+        System.out.print("dx: ");
+        int dx = scan.nextInt();
+        System.out.print("dy: ");
+        int dy = scan.nextInt();
         
         radar.setMonsterLocation(row, col);
         
@@ -49,14 +53,21 @@ public class RadarViewer
         
         // perform 100 scans of the radar wiht a slight pause between each
         // after each scan, instruct the Java Run-Time to redraw the window
-        for(int i = 0; i < 100; i++)
+        for(int i = 0; i < 99; i++)
         {
-            Thread.sleep(100); // sleep 100 milliseconds (1/10 second)
+            Thread.sleep(10); // sleep 100 milliseconds (1/10 second)
             
             radar.scan();
             
+            row += dx;
+            col += dy;
+            
+            radar.setMonsterLocation(row, col);
+            
             frame.repaint();
         }
+        
+        System.out.print(radar.getMonsterVector()[0] + ", " + radar.getMonsterVector()[1]);
     }
 
 }

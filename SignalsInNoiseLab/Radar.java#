@@ -98,8 +98,7 @@ public class Radar
                     for (int newCol = 0; newCol < currentScan[0].length; newCol++)
                     {
                         if ((oldScan[oldRow][oldCol] && currentScan[newRow][oldRow]) 
-                            && (newRow-oldRow <= 5) && (newRow-oldRow >= 0)
-                            && (newCol-oldCol <= 5) && (newCol-oldCol >= 0))
+                            && (newRow-oldRow <= 5) && (newCol-oldCol <= 5))
                         {
                             vectorAccumulator[newRow-oldRow][newCol-oldCol]++;
                         }
