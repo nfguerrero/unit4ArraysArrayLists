@@ -41,7 +41,7 @@ public class RadarViewer
         int dx = scan.nextInt();
         System.out.print("dy: ");
         int dy = scan.nextInt();
-        radar.setMonsterLocation(row, col, 0, 0);
+        radar.setMonsterLocation(col, row, 0, 0);
          
         // set the size of the frame to encompass the contained component
         frame.pack();
@@ -56,11 +56,16 @@ public class RadarViewer
         {
             Thread.sleep(100); // sleep 100 milliseconds (1/10 second)
             
+            radar.setMonsterLocation(col, row, 0, 0);
+            
             radar.scan();
             
             row += dx;
             col += dy; 
-            radar.setMonsterLocation(row, col, dx, dy);
+            
+            radar.setMonsterLocation(col, row, dx, dy);
+            
+            
             frame.repaint();
         }
     }

@@ -51,7 +51,7 @@ public class Radar
         monsterLocationRow = (int)(Math.random() * rows);
         monsterLocationCol = (int)(Math.random() * cols);
          
-        noiseFraction = 0.05;
+        noiseFraction = .05;
         numScans= 0;
     }
     
@@ -97,7 +97,7 @@ public class Radar
                 {
                     for (int newCol = 0; newCol < currentScan[0].length; newCol++)
                     {
-                        if ((oldScan[oldRow][oldCol] && currentScan[newRow][oldRow]) 
+                        if ((oldScan[oldRow][oldCol] && currentScan[newRow][newCol]) 
                             && (newRow-oldRow <= 5) && (newRow-oldRow >= 0)
                             && (newCol-oldCol <= 5) && (newCol-oldCol >= 0))
                         {
@@ -116,6 +116,7 @@ public class Radar
                 oldScan[row][col] = currentScan[row][col];
             }
         }
+        
         // keep track of the total number of scans
         numScans++;
     }
@@ -137,8 +138,8 @@ public class Radar
                 if (vectorAccumulator[row][col] > topVector)
                 {
                     topVector = vectorAccumulator[row][col];
-                    vector[0] = row;
-                    vector[1] = col;
+                    vector[0] = col;
+                    vector[1] = row;
                 }
             }
         }
@@ -161,6 +162,11 @@ public class Radar
         
         // update the radar grid to show that something was detected at the specified location
         currentScan[row][col] = true;
+        
+        //update the accumulator for the new position of the monster(for visual aid only)
+        //int temp = accumulator[row-dx][col-dy];
+        //accumulator[row-dx][col-dy] = accumulator[row][col];
+        //accumulator[row][col] = temp;
     }
     
      /**

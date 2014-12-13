@@ -90,7 +90,7 @@ public class Radar
      * 
      * @pre row and col must be within the bounds of the radar grid
      */
-    public void setMonsterLocation(int row, int col, int dx, int dy)
+    public void setMonsterLocation(int row, int col, int dy, int dx)
     {
         // remember the row and col of the monster's location
         monsterLocationRow = row;

@@ -19,7 +19,6 @@ public class RadarViewer
         final int ROWS = 100;
         final int COLS = 100;
         Radar radar = new Radar(ROWS, COLS);
-        radar.setNoiseFraction(0.10);
         radar.scan();
         
         JFrame frame = new JFrame();
@@ -41,8 +40,14 @@ public class RadarViewer
         int dx = scan.nextInt();
         System.out.print("dy: ");
         int dy = scan.nextInt();
+        System.out.print("\nMore scans = more accuracy(20+ recommended)\nScans: ");
+        int scans = scan.nextInt();
+        System.out.print("Lower noise fraction = more accuracy(.01 recommended)\nNoise: ");
+        radar.setNoiseFraction(scan.nextDouble());
         
-        radar.setMonsterLocation(row, col);
+        radar.setMonsterLocation(col, row);
+        
+        // finds appropriate amount of scans
         
         // set the size of the frame to encompass the contained component
         frame.pack();
@@ -51,23 +56,35 @@ public class RadarViewer
         //  component.
         frame.setVisible(true);
         
+        // little waiting icon thing...
+        System.out.println("\nCalculating...\n");
+        
         // perform 100 scans of the radar wiht a slight pause between each
         // after each scan, instruct the Java Run-Time to redraw the window
-        for(int i = 0; i < 99; i++)
+        for(int i = 0; i < scans; i++)
         {
             Thread.sleep(10); // sleep 100 milliseconds (1/10 second)
+
+            radar.setMonsterLocation(col, row);
             
             radar.scan();
             
             row += dx;
+            if (row >= ROWS)
+            {
+                row = dx-1;
+            }
             col += dy;
-            
-            radar.setMonsterLocation(row, col);
-            
+            if (col >= COLS)
+            {
+                col = dy-1;
+            }
+
             frame.repaint();
         }
         
-        System.out.print(radar.getMonsterVector()[0] + ", " + radar.getMonsterVector()[1]);
+        System.out.println("Monster's dx: " + radar.getMonsterVector()[0]);
+        System.out.print("Monster's dy: " + radar.getMonsterVector()[1]);
     }
 
 }
