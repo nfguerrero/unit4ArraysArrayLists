@@ -25,6 +25,10 @@ public class Radar
     // location of the monster
     private int monsterLocationRow;
     private int monsterLocationCol;
+    
+    //previous monsterLocation
+    private int oldRow;
+    private int oldCol;
 
     // probability that a cell will trigger a false detection (must be >= 0 and < 1)
     private double noiseFraction;
@@ -44,7 +48,7 @@ public class Radar
         oldScan = new boolean[rows][cols]; // elements will be set to flase
         currentScan = new boolean[rows][cols]; // elements will be set to false
         accumulator = new int[rows][cols]; // elements will be set to 0
-        vectorAccumulator = new int[6][6]; // elements will be set to 0, 0-5 for possible row/col of vector
+        vectorAccumulator = new int[11][11]; // elements will be set to 0, 0-5 for possible row/col of vector
         
         // randomly set the location of the monster (can be explicity set through the
         //  setMonsterLocation method
@@ -98,10 +102,10 @@ public class Radar
                     for (int newCol = 0; newCol < currentScan[0].length; newCol++)
                     {
                         if ((oldScan[oldRow][oldCol] && currentScan[newRow][newCol]) 
-                            && (newRow-oldRow <= 5) && (newRow-oldRow >= 0)
-                            && (newCol-oldCol <= 5) && (newCol-oldCol >= 0))
+                            && (newRow-oldRow <= 5) && (newRow-oldRow >= -5)
+                            && (newCol-oldCol <= 5) && (newCol-oldCol >= -5))
                         {
-                            vectorAccumulator[newRow-oldRow][newCol-oldCol]++;
+                            vectorAccumulator[newRow-oldRow+5][newCol-oldCol+5]++;
                         }
                     }
                 }
@@ -121,6 +125,18 @@ public class Radar
         numScans++;
     }
     
+    /**Updates the visual to show the monster's location
+     * 
+     */
+    public void updateVisualizer(int dx, int dy, int scans)
+    {
+        accumulator[oldRow][oldCol] = (int) (Math.random()*scans/5);
+        accumulator[monsterLocationRow][monsterLocationCol] = numScans; 
+        
+        oldRow = monsterLocationRow;
+        oldCol = monsterLocationCol;
+    }
+    
     /**
      * Gets the vector of the monster
      * 
@@ -138,8 +154,8 @@ public class Radar
                 if (vectorAccumulator[row][col] > topVector)
                 {
                     topVector = vectorAccumulator[row][col];
-                    vector[0] = col;
-                    vector[1] = row;
+                    vector[0] = col-5;
+                    vector[1] = row-5;
                 }
             }
         }
@@ -162,11 +178,6 @@ public class Radar
         
         // update the radar grid to show that something was detected at the specified location
         currentScan[row][col] = true;
-        
-        //update the accumulator for the new position of the monster(for visual aid only)
-        //int temp = accumulator[row-dx][col-dy];
-        //accumulator[row-dx][col-dy] = accumulator[row][col];
-        //accumulator[row][col] = temp;
     }
     
      /**

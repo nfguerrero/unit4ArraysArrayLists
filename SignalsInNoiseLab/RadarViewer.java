@@ -67,19 +67,31 @@ public class RadarViewer
 
             radar.setMonsterLocation(col, row);
             
+            
+            
             radar.scan();
+            
+            radar.updateVisualizer(dx, dy, scans);
             
             row += dx;
             if (row >= ROWS)
             {
-                row = dx-1;
+                row = row-ROWS;
+            }
+            else if (row < 0)
+            {
+                row = ROWS+row;
             }
             col += dy;
             if (col >= COLS)
             {
-                col = dy-1;
+                col = col-COLS;
             }
-
+            else if (col < 0)
+            {
+                col = COLS+col;;
+            }
+            
             frame.repaint();
         }
         
